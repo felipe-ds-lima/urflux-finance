@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import 'express'
-import { IRole } from 'src/modules/users/enums/Role'
+import { IAppRole } from 'src/modules/users/enums/AppRole'
 
 declare module 'express' {
   export interface IRequestUser {
     id: string
-    role: IRole
+    appRole: IAppRole
   }
 
   interface Request {
