@@ -1,4 +1,4 @@
-import { IAppRole } from '../enums/AppRole'
+import { IAppRole } from '../enums/app-role'
 
 export class CreateUserDto {
   name: string

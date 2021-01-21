@@ -9,7 +9,7 @@ import {
 import { CreateUserDto } from './dtos/create-user.dto'
 import { UpdateUserDto } from './dtos/update-user.dto'
 import { User } from './entities/user.entity'
-import { IAppRole } from './enums/AppRole'
+import { IAppRole } from './enums/app-role'
 import { UsersRepository } from './repositories/users.repository'
 
 @Injectable()
