@@ -1,13 +1,15 @@
 import { User as UserDB } from '@prisma/client'
 import { Exclude } from 'class-transformer'
 
-import { IRole } from '../enums/Role'
+import { IAppRole } from '../enums/AppRole'
 
 export class User implements UserDB {
   id: string
   name: string
   email: string
-  role: IRole
+
+  @Exclude()
+  appRole: IAppRole
 
   @Exclude()
   password: string

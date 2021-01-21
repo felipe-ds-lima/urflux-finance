@@ -8,8 +8,8 @@ export async function seedUsers(prisma: PrismaService) {
     {
       id: 'c5aa4c1d-742f-49c8-b1e1-21b2b757ce28',
       name: 'Admin',
-      email: 'admin@summit.monts.com.br',
-      role: 'ADMIN',
+      email: 'admin@finance.urflux.com',
+      appRole: 'ADMIN',
       password: await hash('123123123', 8),
       createdAt: new Date(),
       updatedAt: new Date(),

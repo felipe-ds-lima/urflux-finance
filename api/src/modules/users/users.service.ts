@@ -9,6 +9,7 @@ import {
 import { CreateUserDto } from './dtos/create-user.dto'
 import { UpdateUserDto } from './dtos/update-user.dto'
 import { User } from './entities/user.entity'
+import { IAppRole } from './enums/AppRole'
 import { UsersRepository } from './repositories/users.repository'
 
 @Injectable()
@@ -57,7 +58,13 @@ export class UsersService {
     return validate
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
+  async update(
+    id: string,
+    updateUserDto: UpdateUserDto,
+    appRole: IAppRole = 'USER'
+  ): Promise<User> {
+    updateUserDto.appRole = appRole
+
     const user = await this.usersRepository.findById(id)
 
     if (!user) {
