@@ -24,16 +24,32 @@ export class InvoicesService {
           name: { startsWith: 'Conta' },
         })
 
-        if (accounts.length >= 0) {
-          createInvoiceDto.name = `Conta ${accounts.length + 1}`
+        const currentNumber = accounts.reduce((prev, curr) => {
+          const currNumber = Number(curr.name.replace(/\D/g, ''))
+          if (currNumber > prev) {
+            return currNumber
+          }
+          return prev
+        }, 0)
+
+        if (currentNumber >= 0) {
+          createInvoiceDto.name = `Conta ${currentNumber + 1}`
         }
       } else if (createInvoiceDto.type === 'CREDIT') {
         const credits = await this.invoicesRepository.findAllByUserId(userId, {
           name: { startsWith: 'Crédito' },
         })
 
-        if (credits.length >= 0) {
-          createInvoiceDto.name = `Crédito ${credits.length + 1}`
+        const currentNumber = credits.reduce((prev, curr) => {
+          const currNumber = Number(curr.name.replace(/\D/g, ''))
+          if (currNumber > prev) {
+            return currNumber
+          }
+          return prev
+        }, 0)
+
+        if (currentNumber >= 0) {
+          createInvoiceDto.name = `Crédito ${currentNumber + 1}`
         }
       }
     }
