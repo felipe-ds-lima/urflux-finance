@@ -46,6 +46,14 @@ export class InvoicesController {
     return plainToClass(Invoice, invoices)
   }
 
+  @Get(':id')
+  @UseGuards(JwtAuthGuard)
+  async findOne(@Param('id') id: string, @Req() request: Request) {
+    const invoice = await this.invoicesService.findOne(request.user.id, id)
+
+    return plainToClass(Invoice, invoice)
+  }
+
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   async update(

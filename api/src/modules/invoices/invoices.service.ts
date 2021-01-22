@@ -56,6 +56,16 @@ export class InvoicesService {
     }
   }
 
+  async findOne(userId: string, id: string) {
+    const invoice = await this.invoicesRepository.findById(id)
+
+    if (!invoice || invoice?.userId !== userId) {
+      throw new NotFoundException()
+    }
+
+    return invoice
+  }
+
   async findAll(userId: string) {
     const invoices = await this.invoicesRepository.findAllByUserId(userId)
 
