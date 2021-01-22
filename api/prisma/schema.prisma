@@ -27,14 +27,14 @@ model User {
 }
 
 model Invoice {
-  id            String        @id @default(uuid())
-  type          InvoiceType   @default(ACCOUNT)
-  name          String        @default("Conta padrão")
-  icon          String        @default("dollar.png")
-  userId        String
-  user          User          @relation(fields: [userId], references: [id])
-  creditDueDate DateTime?
-  transactions  Transaction[]
+  id           String        @id @default(uuid())
+  type         InvoiceType   @default(ACCOUNT)
+  name         String        @default("Conta padrão")
+  icon         String        @default("dollar.png")
+  userId       String
+  user         User          @relation(fields: [userId], references: [id])
+  creditDueDay Int?
+  transactions Transaction[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
