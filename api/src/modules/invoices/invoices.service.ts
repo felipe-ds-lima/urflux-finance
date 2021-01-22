@@ -7,13 +7,17 @@ import {
 
 import { CreateInvoiceDto } from './dtos/create-invoice.dto'
 import { UpdateInvoiceDto } from './dtos/update-invoice.dto'
+import { Invoice } from './entities/invoice.entity'
 import { InvoicesRepository } from './repositories/invoices.repository'
 
 @Injectable()
 export class InvoicesService {
   constructor(private invoicesRepository: InvoicesRepository) {}
 
-  async create(userId: string, createInvoiceDto: CreateInvoiceDto) {
+  async create(
+    userId: string,
+    createInvoiceDto: CreateInvoiceDto
+  ): Promise<Invoice> {
     if (!createInvoiceDto.name) {
       if (createInvoiceDto.type === 'ACCOUNT') {
         const accounts = await this.invoicesRepository.findAllByUserId(userId, {
@@ -56,7 +60,7 @@ export class InvoicesService {
     }
   }
 
-  async findOne(userId: string, id: string) {
+  async findOne(userId: string, id: string): Promise<Invoice> {
     const invoice = await this.invoicesRepository.findById(id)
 
     if (!invoice || invoice?.userId !== userId) {
@@ -66,13 +70,17 @@ export class InvoicesService {
     return invoice
   }
 
-  async findAll(userId: string) {
+  async findAll(userId: string): Promise<Invoice[]> {
     const invoices = await this.invoicesRepository.findAllByUserId(userId)
 
     return invoices
   }
 
-  async update(userId: string, id: string, updateInvoiceDto: UpdateInvoiceDto) {
+  async update(
+    userId: string,
+    id: string,
+    updateInvoiceDto: UpdateInvoiceDto
+  ): Promise<Invoice> {
     const invoice = await this.invoicesRepository.findById(id)
 
     if (!invoice || invoice?.userId !== userId) {
@@ -91,7 +99,7 @@ export class InvoicesService {
     }
   }
 
-  async remove(userId: string, id: string) {
+  async remove(userId: string, id: string): Promise<void> {
     const invoice = await this.invoicesRepository.findById(id)
 
     if (!invoice || invoice?.userId !== userId) {
