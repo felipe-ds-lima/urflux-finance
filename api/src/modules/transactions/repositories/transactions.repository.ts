@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { Prisma } from '@prisma/client'
 import { PrismaService } from 'src/shared/prisma/prisma.service'
 
 import { CreateTransactionDto } from '../dtos/create-transaction.dto'
@@ -30,9 +31,12 @@ export class TransactionRepository {
     return transaction
   }
 
-  async findAllByUserId(userId: string): Promise<Transaction[]> {
+  async findAllByUserId(
+    userId: string,
+    where?: Prisma.TransactionWhereInput
+  ): Promise<Transaction[]> {
     const transactions = await this.prisma.transaction.findMany({
-      where: { userId, fixed: false, repeatTimes: 0, from: null },
+      where: { fixed: false, repeatTimes: 0, from: null, ...where, userId },
       orderBy: { paymentDate: 'desc' },
       include: { category: { select: { id: true, name: true, icon: true } } },
     })
