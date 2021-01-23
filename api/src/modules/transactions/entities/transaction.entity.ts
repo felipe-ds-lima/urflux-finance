@@ -1,6 +1,5 @@
 import { Transaction as PrismaTransaction } from '@prisma/client'
 import { Exclude } from 'class-transformer'
-import { Category } from 'src/modules/categories/entities/category.entity'
 
 import { ITransactionType } from '../enums/transaction-type'
 

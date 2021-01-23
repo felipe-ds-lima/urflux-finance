@@ -5,9 +5,16 @@ import {
 } from '@nestjs/common'
 
 import { CreateTransactionDto } from './dtos/create-transaction.dto'
+import { FindInvoiceBalanceDto } from './dtos/find-invoice-balance.dto'
 import { UpdateTransactionDto } from './dtos/update-transaction.dto'
+import { Balance } from './entities/balance.entity'
 import { Transaction } from './entities/transaction.entity'
 import { TransactionRepository } from './repositories/transactions.repository'
+
+interface IInvoiceBalance {
+  transactions: Transaction[]
+  balance: Balance
+}
 
 @Injectable()
 export class TransactionsService {
@@ -82,5 +89,22 @@ export class TransactionsService {
     } catch {
       throw new InternalServerErrorException()
     }
+  }
+
+  async findInvoiceBalance(
+    userId: string,
+    findInvoiceBalanceDto: FindInvoiceBalanceDto
+  ): Promise<IInvoiceBalance> {
+    const transactions = await this.transactionsRepository.findAllByInvoiceMonth(
+      userId,
+      findInvoiceBalanceDto
+    )
+
+    const balance = await this.transactionsRepository.findInvoiceMonthBalance(
+      userId,
+      findInvoiceBalanceDto
+    )
+
+    return { transactions, balance }
   }
 }
