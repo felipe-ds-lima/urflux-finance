@@ -8,11 +8,14 @@
   "extends": [
     "plugin:react/recommended",
     "standard",
+    "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:jsx-a11y/recommended",
+    "plugin:prettier/recommended",
     "prettier/@typescript-eslint",
     "prettier/standard",
-    "prettier/react"
+    "prettier/react",
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -27,6 +30,8 @@
     "import-helpers",
     "@typescript-eslint",
     "jsx-a11y",
+    "@typescript-eslint/eslint-plugin",
+    "react-hooks",
     "prettier"
   ],
   "rules": {
@@ -39,13 +44,9 @@
           "/^react/",
           "/^next/",
           "/^styled-components/",
-          "/^@/",
           "module",
-          [
-            "parent",
-            "sibling",
-            "index"
-          ]
+          "/^@/",
+          ["parent", "sibling", "index"]
         ],
         "alphabetize": {
           "order": "asc",
@@ -60,10 +61,61 @@
     "comma-dangle": "off",
     "prefer-template": "error",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "jsx-a11y/anchor-is-valid": [ "error", {
-      "components": [ "Link" ],
-      "specialLink": [ "hrefLeft", "hrefRight" ],
-      "aspects": [ "invalidHref", "preferButton" ]
-    }]
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["hrefLeft", "hrefRight"],
+        "aspects": ["invalidHref", "preferButton"]
+      }
+    ],
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "_"
+      }
+    ],
+    "camelcase": "off",
+    "no-useless-constructor": "off",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "interface",
+        "format": ["PascalCase"],
+        "custom": {
+          "regex": "^I[A-Z]",
+          "match": true
+        }
+      }
+    ],
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+    "import/prefer-default-export": "off",
+    "no-unused-expressions": "off",
+    "import/no-duplicates": "off",
+    "@typescript-eslint/explicit-function-return-type": [
+      "off",
+      {
+        "allowExpressions": true
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
   }
 }
