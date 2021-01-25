@@ -44,6 +44,8 @@ export class InvoicesRepository {
   }
 
   async delete(id: string): Promise<void> {
+    await this.prisma.transaction.deleteMany({ where: { invoiceId: id } })
+
     await this.prisma.invoice.delete({ where: { id } })
   }
 }

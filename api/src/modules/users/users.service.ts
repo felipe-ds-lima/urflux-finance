@@ -113,7 +113,8 @@ export class UsersService {
       const updatedUser = await this.usersRepository.update(id, updateUserDto)
 
       return updatedUser
-    } catch {
+    } catch (error) {
+      console.log('users:update:', error)
       throw new InternalServerErrorException()
     }
   }
@@ -127,7 +128,8 @@ export class UsersService {
 
     try {
       await this.usersRepository.delete(id)
-    } catch {
+    } catch (error) {
+      console.log('users:remove:', error)
       throw new InternalServerErrorException()
     }
   }
