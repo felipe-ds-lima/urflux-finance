@@ -62,9 +62,9 @@ export class UsersRepository {
   }
 
   async delete(id: string): Promise<void> {
-    await this.prisma.invoice.deleteMany({ where: { userId: id } })
-    await this.prisma.category.deleteMany({ where: { userId: id } })
     await this.prisma.transaction.deleteMany({ where: { userId: id } })
+    await this.prisma.category.deleteMany({ where: { userId: id } })
+    await this.prisma.invoice.deleteMany({ where: { userId: id } })
 
     await this.prisma.user.delete({
       where: { id },
