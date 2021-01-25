@@ -46,7 +46,17 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const logout = useCallback(() => {
     setData({ loading: false } as IAuthState)
-    localStorage.removeItem('@urFluxFinance:token')
+    const removeKeys = []
+
+    for (let i = 0; i < localStorage.length; i++) {
+      if (localStorage.key(i).indexOf('@urFluxFinance:') === 0) {
+        removeKeys.push(localStorage.key(i))
+      }
+    }
+
+    for (let i = 0; i < removeKeys.length; i++) {
+      localStorage.removeItem(removeKeys[i])
+    }
   }, [])
 
   useEffect(() => {

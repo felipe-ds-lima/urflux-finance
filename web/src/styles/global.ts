@@ -12,6 +12,7 @@ export default createGlobalStyle`
     color: ${props => props.theme.colors.text};
     font-family: ${props => props.theme.fonts.paragraph};
     font-weight: 400;
+    font-size: ${props => props.theme.texts.textNormal};
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -34,8 +35,8 @@ export default createGlobalStyle`
   }
 
   p, span, strong, button, input {
-    font-family: ${props => props.theme.fonts.paragraph};
-    font-size: ${props => props.theme.texts.textNormal};
+    font-size: inherit;
+    font-family: inherit;
   }
 
   button {
